@@ -40,3 +40,4 @@ f=open("a1.txt", 'w')
 for i in a:
     f.write(b2[i])
 print(len(a))
+print((14*3+8*4+8*2+1)/31)
