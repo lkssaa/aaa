@@ -1,4 +1,4 @@
-x
+
 f = open("text07.txt", encoding='utf-8')
 a=f.readline()
 
