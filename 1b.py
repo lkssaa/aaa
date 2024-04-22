@@ -1,7 +1,16 @@
-
+x
 f = open("text07.txt", encoding='utf-8')
 a=f.readline()
+
+def isb(slovar, text): #функция для вычисления избыточности
+    length = 0
+    for i in text:
+        length += len(slovar[i])
+    r = length / len(text)
+    return r
+
 b2={}
+b3 = {}
 b2['А']='33'
 b2[' ']='0'
 b2['Т']='01'
@@ -34,10 +43,4 @@ b2['Ц']='1032'
 b2['Ш']='2032'
 b2['Ж']='3032'
 
-
-print(b2)
-f=open("a1.txt", 'w')
-for i in a:
-    f.write(b2[i])
-print(len(a))
-print((14*3+8*4+8*2+1)/31)
+print(isb(b2, a))
