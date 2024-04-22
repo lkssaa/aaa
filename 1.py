@@ -1,26 +1,18 @@
 import heapq
-
-class TreeNode:
-    def __init__(self, char, freq):
-        self.char = char
-        self.freq = freq
-        self.left = None
-        self.right = None  
-
-def getcode(tree):
+def getcode(tree): 
     slovar = {}
     for i, i1 in tree:
         slovar[i] = i1
     return slovar
 
-def isb(slovar, text):
+def isb(slovar, text): #функция для вычисления избыточности
     length = 0
     for i in text:
         length += len(slovar[i])
     r = length / len(text)
     return r
 
-def btree(slovar):
+def btree(slovar): #функция для построения бинарного дерева с помощью куч
     heap = [[weight, [char, ""]] for char, weight in slovar.items()]
     heapq.heapify(heap)
     while len(heap) > 1:
@@ -34,23 +26,23 @@ def btree(slovar):
     
     return sorted(heapq.heappop(heap)[1:], key=lambda p: (len(p[-1]), p))
 
-f = open("text07.txt", encoding='utf-8')
+f = open("text07.txt", encoding='utf-8') #открытие файла с текстом
 a=f.readline()
 f.close()
 b={}
 c=0
-for i in "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ ":
+for i in "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ ": #заполнение частотного словаря
     exec("b['%s']=0;" % i)
 for i in a:
     b[i]+=1
-b = dict(sorted(b.items(), key=lambda x: x[1]))
+b = dict(sorted(b.items(), key=lambda x: x[1]))#сортировка словаря по частотам
 b.pop('Ъ')
 b.pop('Ф')
-t=btree(b)
-ans=getcode(t)
+t=btree(b)#построение бинарного дерева
+ans=getcode(t)#получение по дереву кодов символов
 f=open("a1.txt", 'w')
-re = isb(ans, a)
-print(ans)
+re = isb(ans, a)#расчет избыточности
+print(ans)#вывод
 print(re)
 for i in a:
     f.write(ans[i])
